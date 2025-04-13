@@ -42,7 +42,7 @@ BLYNK_WRITE(V0) {
   if (!scheduleActive) {
     int manualState = param.asInt();
     autoRelayState = (manualState != 0);
-    digitalWrite(RELAY_PIN, autoRelayState ? HIGH : LOW);
+    digitalWrite(RELAY_PIN, autoRelayState ? LOW : HIGH);
     Serial.print("Ручне керування реле: ");
     Serial.println(autoRelayState ? "ON" : "OFF");
     updatePowerStatus(false);
@@ -124,7 +124,7 @@ void loop() {
   
     if (scheduleOn != autoRelayState) {
       autoRelayState = scheduleOn;
-      digitalWrite(RELAY_PIN, autoRelayState ? HIGH : LOW);
+      digitalWrite(RELAY_PIN, autoRelayState ? LOW : HIGH);
       Serial.print("Реле ");
       if (!autoRelayState) Blynk.setProperty(V0, "color", "#0085FE"); // ← повертаємо стандартний колір кнопки
       else Blynk.setProperty(V0, "color", "#004382AA"); // ← змінюємо колір кнопки на темно-синій, щоб показати, що вона неактивна
